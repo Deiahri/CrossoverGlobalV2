@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   RAW DESIGN TOKENS
+   Single source of truth for all design values.
+───────────────────────────────────────────── */
+
+:root {
+
+  /* Brand blue scale */
+  --brand-50:  #f0f2ff;
+  --brand-100: #e3e6ff;
+  --brand-200: #c7ccff;
+  --brand-300: #9ba5ff;
+  --brand-400: #697dff;
+  --brand-500: #3a57f5;
+  --brand-600: #1e3de0;
+  --brand-700: #0625bb;
+  --brand-800: #051b82;
+  --brand-900: #041260;
+  --brand-950: #02093c;
+
+  /* Neutral scale */
+  --neutral-50:  #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  /* Status colors */
+  --status-success: #16a34a;
+  --status-warning: #d97706;
+  --status-error:   #dc2626;
+  --status-info:    var(--brand-700);
+
+  /* Semantic surface */
+  --background:     var(--neutral-100);
+  --foreground:     var(--neutral-900);
+  --surface:        #ffffff;
+  --surface-raised: var(--neutral-50);
+  --border:         var(--neutral-200);
+  --border-strong:  var(--neutral-400);
+
+  /* Semantic brand */
+  --primary:              var(--brand-700);
+  --primary-hover:        var(--brand-800);
+  --primary-foreground:   #ffffff;
+  --secondary:            var(--brand-800);
+  --secondary-hover:      var(--brand-900);
+  --secondary-foreground: #ffffff;
+  --muted:                var(--neutral-100);
+  --muted-foreground:     var(--neutral-500);
+  --accent:               var(--brand-50);
+  --accent-foreground:    var(--brand-700);
+  --donate:               #d40000;
+  --donate-hover:         #b50000;
+  --donate-foreground:    #ffffff;
+
+  /* Animation */
+  --duration-instant: 50ms;
+  --duration-fast:    100ms;
+  --duration-normal:  200ms;
+  --duration-slow:    300ms;
+  --duration-slower:  500ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Typography scale (rem) */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+  --text-7xl:  4.5rem;
+
+  /* Breakpoints (reference only — use Tailwind responsive prefixes in classes) */
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1536px;
+}
+
+/* ─────────────────────────────────────────────
+   TAILWIND THEME
+   Exposes raw tokens as Tailwind utility classes.
+───────────────────────────────────────────── */
+
+@theme inline {
+
+  /* Fonts */
+  --font-sans: var(--font-jakarta-sans);
+
+  /* Brand → bg-brand-*, text-brand-*, border-brand-*, etc. */
+  --color-brand-50:  var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+
+  /* Neutral → bg-neutral-*, text-neutral-*, etc. */
+  --color-neutral-50:  var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+
+  /* Semantic utilities */
+  --color-background:      var(--background);
+  --color-foreground:      var(--foreground);
+  --color-surface:         var(--surface);
+  --color-surface-raised:  var(--surface-raised);
+  --color-border:          var(--border);
+  --color-border-strong:   var(--border-strong);
+  --color-primary:         var(--primary);
+  --color-primary-hover:   var(--primary-hover);
+  --color-primary-fg:      var(--primary-foreground);
+  --color-secondary:       var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-fg:    var(--secondary-foreground);
+  --color-muted:           var(--muted);
+  --color-muted-fg:        var(--muted-foreground);
+  --color-accent:          var(--accent);
+  --color-accent-fg:       var(--accent-foreground);
+  --color-donate:          var(--donate);
+  --color-donate-hover:    var(--donate-hover);
+  --color-donate-fg:       var(--donate-foreground);
+  --color-success:         var(--status-success);
+  --color-warning:         var(--status-warning);
+  --color-error:           var(--status-error);
+  --color-info:            var(--status-info);
+
+  /* Radius → rounded-xs, rounded-sm, rounded-md, etc. */
+  --radius-xs:   0.125rem;
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-3xl:  2rem;
+  --radius-full: 9999px;
+
+  /* Shadows → shadow-xs, shadow-sm, shadow-md, etc. */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+}
+
+/* ─────────────────────────────────────────────
+   BASE STYLES
+───────────────────────────────────────────── */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta-sans);
+}

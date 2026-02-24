@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:crossoverglobal.org)",
+      "Bash(npm install @strapi/blocks-react-renderer react-icons)",
+      "WebFetch(domain:www.crossoverglobal.org)"
+    ]
+  }
+}
