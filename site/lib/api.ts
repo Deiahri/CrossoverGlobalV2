@@ -1,4 +1,4 @@
-import type { Article, Project, Sponsorship } from "./types";
+import type { Article, Project, Sponsorship, Supporter } from "./types";
 
 const STRAPI_URL = process.env.STRAPI_URL ?? "http://localhost:1337";
 
@@ -30,7 +30,7 @@ async function strapiList<T>(path: string): Promise<T[]> {
     // console.log('bb', res, process.env.STRAPI_API_TOKEN);
     // if (!res.ok) return [];
     const json: StrapiListResponse<T> = await res.json();
-    // console.log('hi', json);
+    console.log('hi', json);
     return json.data ?? [];
   } catch {
     // console.error('error', e);
@@ -70,7 +70,7 @@ export async function getProject(slug: string): Promise<Project | null> {
 // ---------------------------------------------------------------------------
 
 const SPONSORSHIP_CARD_FIELDS =
-  "fields[0]=slug&fields[1]=title&fields[2]=desc&fields[3]=country&fields[4]=sponsee&fields[5]=complete";
+  "fields[0]=slug&fields[1]=title&fields[2]=short_desc&fields[3]=country&fields[4]=sponsee&fields[5]=complete";
 
 export async function getSponsorships(): Promise<Sponsorship[]> {
   return strapiList<Sponsorship>(
@@ -89,7 +89,7 @@ export async function getSponsorship(
   slug: string,
 ): Promise<Sponsorship | null> {
   const items = await strapiList<Sponsorship>(
-    `/sponsorships?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[share_links]=true&populate[optional_sections]=true&pagination[limit]=1`,
+    `/sponsorships?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[optional_sections]=true&pagination[limit]=1`,
   );
   return items[0] ?? null;
 }
@@ -120,4 +120,14 @@ export async function getArticle(slug: string): Promise<Article | null> {
     `/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[featured_image]=true&pagination[limit]=1`,
   );
   return items[0] ?? null;
+}
+
+// ---------------------------------------------------------------------------
+// Supporters
+// ---------------------------------------------------------------------------
+
+export async function getSupporters(): Promise<Supporter[]> {
+  return strapiList<Supporter>(
+    `/supporters?populate[img]=true&sort[0]=createdAt:asc&pagination[limit]=100`,
+  );
 }

@@ -43,7 +43,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       <div className="mt-12 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-8">
         <Link
           href="/good-news"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-fg hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary transition-colors"
           style={{ transitionDuration: 'var(--duration-fast)' }}
         >
           <RiArrowLeftLine className="w-4 h-4" aria-hidden />

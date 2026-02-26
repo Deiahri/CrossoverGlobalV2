@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_site_components_optional_sections",
+  "info": {
+    "displayName": "optional_section",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "blocks",
+      "required": true
+    }
+  },
+  "config": {}
+}

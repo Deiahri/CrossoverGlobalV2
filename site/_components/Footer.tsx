@@ -1,5 +1,8 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { RiCrosshairLine, RiHeartLine, RiExternalLinkLine, RiYoutubeLine } from 'react-icons/ri'
+import { RiHeartLine, RiExternalLinkLine, RiYoutubeLine } from 'react-icons/ri'
+
+const LOGO_SRC = 'https://www.crossoverglobal.org/images/logo.png'
 
 const HELP_LINKS = [
   { href: '/projects', label: 'Donate to a Project' },
@@ -21,11 +24,16 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link
               href="/"
-              className="flex items-center gap-2 text-white font-bold text-lg mb-3 hover:text-neutral-200 transition-colors"
-              style={{ transitionDuration: 'var(--duration-fast)' }}
+              className="inline-block mb-3"
+              aria-label="Crossover Global"
             >
-              <RiCrosshairLine className="w-5 h-5 shrink-0 text-brand-400" aria-hidden />
-              Crossover Global
+              <Image
+                src={LOGO_SRC}
+                alt="Crossover Global"
+                width={180}
+                height={40}
+                className="h-8 w-auto object-contain"
+              />
             </Link>
             <p className="text-sm leading-relaxed text-neutral-400">
               A 501(c)(3) charitable organization providing life assistance to brothers

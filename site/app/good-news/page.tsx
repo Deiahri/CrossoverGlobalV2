@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default async function GoodNewsPage() {
-  const articles = await getArticles()
+  const articlesRaw = await getArticles()
+
+  const articles = [...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw];
 
   return (
     <>
@@ -19,9 +21,9 @@ export default async function GoodNewsPage() {
         subtitle="Stories of hope, faith, and transformation — celebrating what is happening around the world."
       />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {articles.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="divide-y divide-border">
             {articles.map((article) => (
               <ArticleCard key={article.slug} {...article} />
             ))}

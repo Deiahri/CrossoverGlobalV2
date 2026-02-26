@@ -44,8 +44,7 @@ export default function HomeHero() {
 
         {/* Mission statement */}
         <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-brand-100 sm:text-xl">
-          &ldquo;To provide life assistance to those of our brothers and sisters who need it.&rdquo;
-          — Supporting widows, orphans, missionaries, and underprivileged communities worldwide.
+          Supporting widows, orphans, missionaries, and underprivileged communities worldwide.
         </p>
 
         {/* CTAs */}

@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sponsorships",
+  "info": {
+    "singularName": "sponsorship",
+    "pluralName": "sponsorships",
+    "displayName": "Sponsorship"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "sponsee": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "short_desc": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "sponsee_desc": {
+      "type": "blocks",
+      "required": true
+    },
+    "sponsee_request_desc": {
+      "type": "blocks",
+      "required": true
+    },
+    "sponsee_request_video": {
+      "type": "string"
+    },
+    "donorbox_code": {
+      "type": "text",
+      "required": true
+    },
+    "encouragement": {
+      "type": "string",
+      "required": true
+    },
+    "optional_sections": {
+      "type": "component",
+      "component": "site-components.optional-section",
+      "repeatable": true
+    },
+    "complete": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}

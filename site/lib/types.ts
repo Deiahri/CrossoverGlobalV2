@@ -59,11 +59,6 @@ export interface Project {
 // Sponsorship
 // ---------------------------------------------------------------------------
 
-export interface SponsorshipShareLink {
-  icon: string // icon filename, e.g. "whatsapp.svg"
-  url: string
-}
-
 export interface SponsorshipOptionalSection {
   title: string
   content: BlocksContent
@@ -74,16 +69,26 @@ export interface Sponsorship {
   title: string
   sponsee: string // person's name
   country: string
-  desc: string // short card desc
+  short_desc: string // short card desc
   image: StrapiMedia
   sponsee_desc: BlocksContent
   sponsee_request_desc: BlocksContent // itemized costs / needs
   sponsee_request_video?: string // YouTube embed URL
   donorbox_code: string // raw Donorbox HTML embed
   encouragement: string // brief call-to-action text above donate widget
-  share_links: SponsorshipShareLink[]
   optional_sections: SponsorshipOptionalSection[]
   complete: boolean
+}
+
+// ---------------------------------------------------------------------------
+// Supporter
+// ---------------------------------------------------------------------------
+
+export interface Supporter {
+  img: StrapiMedia
+  title: string
+  description: string
+  website: string
 }
 
 // ---------------------------------------------------------------------------

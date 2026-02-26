@@ -466,6 +466,84 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiSponsorshipSponsorship extends Struct.CollectionTypeSchema {
+  collectionName: 'sponsorships';
+  info: {
+    displayName: 'Sponsorship';
+    pluralName: 'sponsorships';
+    singularName: 'sponsorship';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    complete: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    country: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    donorbox_code: Schema.Attribute.Text & Schema.Attribute.Required;
+    encouragement: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sponsorship.sponsorship'
+    > &
+      Schema.Attribute.Private;
+    optional_sections: Schema.Attribute.Component<
+      'site-components.optional-section',
+      true
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    short_desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    sponsee: Schema.Attribute.String & Schema.Attribute.Required;
+    sponsee_desc: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    sponsee_request_desc: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    sponsee_request_video: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSupporterSupporter extends Struct.CollectionTypeSchema {
+  collectionName: 'supporters';
+  info: {
+    displayName: 'Supporter';
+    pluralName: 'supporters';
+    singularName: 'supporter';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::supporter.supporter'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -978,6 +1056,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::sponsorship.sponsorship': ApiSponsorshipSponsorship;
+      'api::supporter.supporter': ApiSupporterSupporter;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

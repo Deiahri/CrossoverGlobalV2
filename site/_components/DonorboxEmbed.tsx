@@ -1,15 +1,26 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 interface DonorboxEmbedProps {
   html: string
+  id?: string
 }
 
-export default function DonorboxEmbed({ html }: DonorboxEmbedProps) {
-  if (!html) return null
+export default function DonorboxEmbed({ html, id }: DonorboxEmbedProps) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
+  if (!html || !mounted) return null
   return (
     <div
-      className="w-full max-w-2xl mx-auto"
+      id={id}
+      style={{
+        maxWidth: '25rem',
+        width: '100%',
+        margin: 'auto',
+        backgroundColor: 'white',
+      }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

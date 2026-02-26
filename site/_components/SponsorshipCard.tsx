@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 import Badge from './Badge'
 import type { Sponsorship } from '../lib/types'
+import { resolveStrapiImageUrl } from '@/lib/tools'
 
-type SponsorshipCardProps = Pick<Sponsorship, 'slug' | 'title' | 'image' | 'desc' | 'country' | 'sponsee' | 'complete'>
+type SponsorshipCardProps = Pick<Sponsorship, 'slug' | 'title' | 'image' | 'short_desc' | 'country' | 'sponsee' | 'complete'>
 
-export default function SponsorshipCard({ slug, title, image, desc, country, sponsee, complete }: SponsorshipCardProps) {
+export default function SponsorshipCard({ slug, title, image, short_desc, country, sponsee, complete }: SponsorshipCardProps) {
   return (
     <Link
       href={`/sponsorship/${slug}`}
@@ -15,12 +16,10 @@ export default function SponsorshipCard({ slug, title, image, desc, country, spo
     >
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-neutral-100">
-        <Image
-          src={image.url}
+        <img
+          src={resolveStrapiImageUrl(image.url)}
           alt={image.alternativeText ?? sponsee}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform group-hover:scale-105"
           style={{ transitionDuration: 'var(--duration-slow)' }}
         />
         <div className="absolute top-3 left-3">
@@ -28,10 +27,10 @@ export default function SponsorshipCard({ slug, title, image, desc, country, spo
         </div>
         {complete && (
           <div className="absolute inset-0 bg-neutral-900/60 flex items-center justify-center">
-            <span className="flex items-center gap-2 bg-white/90 text-neutral-800 text-sm font-semibold px-4 py-2 rounded-full shadow">
-              <RiCheckboxCircleLine className="w-4 h-4 text-green-600" aria-hidden />
-              Sponsored
-            </span>
+        <span className="flex items-center gap-2 bg-white/90 text-neutral-800 text-sm font-semibold px-4 py-2 rounded-full shadow">
+          <RiCheckboxCircleLine className="w-4 h-4 text-green-600" aria-hidden />
+          Sponsored
+        </span>
           </div>
         )}
       </div>
@@ -42,7 +41,7 @@ export default function SponsorshipCard({ slug, title, image, desc, country, spo
         <h3 className="text-base font-semibold text-foreground leading-snug group-hover:text-primary transition-colors" style={{ transitionDuration: 'var(--duration-fast)' }}>
           {title}
         </h3>
-        <p className="text-sm text-muted-fg leading-relaxed line-clamp-2">{desc}</p>
+        <p className="text-sm text-muted-fg leading-relaxed line-clamp-2">{short_desc}</p>
       </div>
     </Link>
   )

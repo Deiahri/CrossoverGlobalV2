@@ -8,7 +8,8 @@ import RichText from '../../../_components/RichText'
 import MediaGallery from '../../../_components/MediaGallery'
 import ImpactGrid from '../../../_components/ImpactGrid'
 import DonorboxEmbed from '../../../_components/DonorboxEmbed'
-import { RiMapPin2Line, RiMoneyDollarCircleLine, RiCalendarLine } from 'react-icons/ri'
+import Button from '../../../_components/Button'
+import { RiMapPin2Line, RiMoneyDollarCircleLine, RiCalendarLine, RiArrowDownLine } from 'react-icons/ri'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -62,6 +63,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               {project.title}
             </h1>
           </div>
+        </div>
+      </div>
+
+      {/* Short desc + donate CTA */}
+      <div className="border-b border-border bg-surface">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row sm:items-center gap-4">
+          <p className="flex-1 text-base text-muted-fg leading-relaxed">{project.desc}</p>
+          {project.donorbox_code && (
+            <Button href="#donate-heading" variant="donate" size="md" className="shrink-0 self-start sm:self-auto">
+              Donate <RiArrowDownLine className="h-4 w-4" aria-hidden />
+            </Button>
+          )}
         </div>
       </div>
 

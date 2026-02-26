@@ -1,38 +1,63 @@
-import type { SponsorshipShareLink } from '../lib/types'
+'use client'
+
+import { useState } from 'react'
+import { RiShareForwardLine, RiCheckLine, RiHeartLine } from 'react-icons/ri'
 
 interface ShareLinksProps {
-  links: SponsorshipShareLink[]
+  title: string
+  text?: string
+  subheading?: string
+  scrollTargetId?: string // when provided, renders a Donate button that scrolls to the given element
 }
 
-export default function ShareLinks({ links }: ShareLinksProps) {
-  if (!links || links.length === 0) return null
+export default function ShareLinks({ title, text, subheading, scrollTargetId }: ShareLinksProps) {
+  const [copied, setCopied] = useState(false)
+
+  async function handleShare() {
+    try {
+      await navigator.share({ title, text, url: window.location.href })
+    } catch {
+      await navigator.clipboard.writeText(window.location.href)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
+  function handleDonate() {
+    document.getElementById(scrollTargetId!)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
-    <div aria-label="Share this sponsorship">
-      <p className="mb-3 text-sm font-semibold text-foreground">Share this opportunity</p>
-      <div className="flex flex-wrap gap-3">
-        {links.map((link, i) => (
-          <a
-            key={i}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm text-foreground hover:bg-surface-raised hover:border-border-strong transition-colors shadow-xs"
+    <section
+      aria-label="Share this sponsorship"
+      className="w-full rounded-2xl bg-brand-950 px-8 py-12 flex flex-col items-center text-center gap-4"
+    >
+      <h2 className="text-3xl font-bold text-white sm:text-4xl">Share this opportunity</h2>
+      {subheading && (
+        <p className="max-w-md text-base text-white/70 leading-relaxed">{subheading}</p>
+      )}
+      <div className="mt-2 flex flex-wrap justify-center gap-3">
+        {scrollTargetId && (
+          <button
+            onClick={handleDonate}
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-fg hover:opacity-90 transition-opacity shadow-sm cursor-pointer"
             style={{ transitionDuration: 'var(--duration-fast)' }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={link.icon}
-              alt=""
-              width={18}
-              height={18}
-              className="shrink-0"
-              aria-hidden
-            />
-            Share
-          </a>
-        ))}
+            <RiHeartLine className="shrink-0 text-base" aria-hidden />
+            Donate
+          </button>
+        )}
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 transition-colors shadow-sm cursor-pointer"
+          style={{ transitionDuration: 'var(--duration-fast)' }}
+        >
+          {copied
+            ? <><RiCheckLine className="shrink-0 text-base" aria-hidden />Copied!</>
+            : <><RiShareForwardLine className="shrink-0 text-base" aria-hidden />Share</>
+          }
+        </button>
       </div>
-    </div>
+    </section>
   )
 }

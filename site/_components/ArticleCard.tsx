@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import type { Article } from '../lib/types'
 import { resolveStrapiImageUrl } from '@/lib/tools'
@@ -14,15 +13,13 @@ function formatDate(iso: string) {
 }
 
 export default function ArticleCard({ slug, title, desc, featured_image, publish_date, author }: ArticleCardProps) {
-  console.log('img', featured_image);
   return (
     <Link
       href={`/good-news/${slug}`}
-      className="group flex flex-col rounded-xl overflow-hidden border border-border bg-surface shadow-sm hover:shadow-md transition-shadow"
-      style={{ transitionDuration: 'var(--duration-normal)' }}
+      className="group flex gap-6 py-8"
     >
-      {/* Image */}
-      <div className="relative aspect-video overflow-hidden bg-neutral-100">
+      {/* Thumbnail */}
+      <div className="hidden sm:block flex-shrink-0 w-44 h-28 rounded-lg overflow-hidden bg-neutral-100">
         <img
           src={resolveStrapiImageUrl(featured_image.url)}
           alt={featured_image.alternativeText ?? title}
@@ -31,8 +28,8 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
         />
       </div>
 
-      {/* Body */}
-      <div className="flex flex-col gap-2 p-5 flex-1">
+      {/* Text */}
+      <div className="flex flex-col gap-2 min-w-0">
         <div className="flex items-center gap-2 text-xs text-muted-fg">
           <time dateTime={publish_date}>{formatDate(publish_date)}</time>
           {author && (
@@ -42,10 +39,13 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
             </>
           )}
         </div>
-        <h3 className="text-base font-semibold text-foreground leading-snug group-hover:text-primary transition-colors" style={{ transitionDuration: 'var(--duration-fast)' }}>
+        <h3
+          className="text-lg font-bold leading-snug text-foreground group-hover:text-primary transition-colors"
+          style={{ transitionDuration: 'var(--duration-fast)' }}
+        >
           {title}
         </h3>
-        <p className="text-sm text-muted-fg leading-relaxed line-clamp-3">{desc}</p>
+        <p className="text-sm text-muted-fg leading-relaxed line-clamp-2">{desc}</p>
       </div>
     </Link>
   )

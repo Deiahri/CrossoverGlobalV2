@@ -51,7 +51,8 @@ All components must use design-language tokens exclusively — no raw hex values
 | `ImpactGrid` | `_components/ImpactGrid.tsx` | Renders `ProjectImpact[]` — quantity / verb / description / media | `/projects/[slug]` |
 | `BibleVerse` | `_components/BibleVerse.tsx` | Displays verse content and citation | `/projects/[slug]` |
 | `DonorboxEmbed` | `_components/DonorboxEmbed.tsx` | Renders raw Donorbox HTML (`donorbox_code` or `donorbox_wall`) safely | `/projects/[slug]`, `/sponsorship/[slug]` |
-| `ShareLinks` | `_components/ShareLinks.tsx` | Social share icons from `SponsorshipShareLink[]` | `/sponsorship/[slug]` |
+| `ScrollIntoViewButton` | `_components/ScrollIntoViewButton.tsx` | Client wrapper around `Button` that smoothly scrolls to a target element by ID | `/sponsorship/[slug]` |
+| `ShareLinks` | `_components/ShareLinks.tsx` | Web Share API button (`navigator.share`) | `/sponsorship/[slug]` |
 
 ---
 
