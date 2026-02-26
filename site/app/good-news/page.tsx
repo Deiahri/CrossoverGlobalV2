@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 }
 
 export default async function GoodNewsPage() {
-  const articlesRaw = await getArticles()
+  const articles = await getArticles()
 
-  const articles = [...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw];
+  // const articles = [...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw, ...articlesRaw];
 
   return (
     <>
