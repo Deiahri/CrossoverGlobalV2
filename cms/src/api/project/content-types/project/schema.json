@@ -44,7 +44,7 @@
       "repeatable": true
     },
     "donorbox_code": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "donorbox_wall": {
@@ -80,11 +80,11 @@
       "required": true,
       "default": false
     },
-    "completion_date": {
-      "type": "string"
-    },
     "completion_notes": {
       "type": "string"
+    },
+    "completion_date": {
+      "type": "datetime"
     }
   }
 }

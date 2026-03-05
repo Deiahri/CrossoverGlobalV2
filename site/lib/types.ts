@@ -97,7 +97,7 @@ export interface Supporter {
 // ---------------------------------------------------------------------------
 
 export interface ArticleSection {
-  media: StrapiMedia
+  media: StrapiMedia[]
   youtubeURL?: string
   text: BlocksContent
 }
@@ -106,7 +106,7 @@ export interface Article {
   slug: string
   title: string
   desc: string
-  featured_image: StrapiPhoto
+  featured_image?: StrapiPhoto
   content: ArticleSection[]
   publish_date: string // ISO date string
   author?: string

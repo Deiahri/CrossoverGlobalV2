@@ -120,31 +120,31 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         {/* Content sections */}
         {project.content?.map((section, i) => (
           <Reveal key={i} variant="fadeUp">
-            {section.media && (
-              <div className="mb-6 overflow-hidden rounded-lg">
-                {section.media.mime.startsWith('video/') ? (
+            {section.media?.map((m, j) => (
+              <div key={j} className="mb-6 overflow-hidden rounded-lg">
+                {m.mime.startsWith('video/') ? (
                   <video
-                    src={resolveStrapiMediaUrl(section.media.url)}
+                    src={resolveStrapiMediaUrl(m.url)}
                     controls
                     className="w-full rounded-lg"
-                    aria-label={section.media.alternativeText ?? undefined}
+                    aria-label={m.alternativeText ?? undefined}
                   />
-                ) : section.media.mime.startsWith('audio/') ? (
+                ) : m.mime.startsWith('audio/') ? (
                   <audio
-                    src={resolveStrapiMediaUrl(section.media.url)}
+                    src={resolveStrapiMediaUrl(m.url)}
                     controls
                     className="w-full"
-                    aria-label={section.media.alternativeText ?? undefined}
+                    aria-label={m.alternativeText ?? undefined}
                   />
                 ) : (
                   <img
-                    src={resolveStrapiMediaUrl(section.media.url)}
-                    alt={section.media.alternativeText ?? ''}
+                    src={resolveStrapiMediaUrl(m.url)}
+                    alt={m.alternativeText ?? ''}
                     className="w-full rounded-lg object-cover"
                   />
                 )}
               </div>
-            )}
+            ))}
             {section.youtubeURL && (
               <div className="mb-6">
                 <YoutubeEmbed url={section.youtubeURL} />

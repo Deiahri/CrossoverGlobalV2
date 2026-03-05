@@ -1,6 +1,6 @@
 import { getSupporters } from "../lib/api";
 
-const STRAPI_URL = process.env.STRAPI_URL ?? "http://localhost:1337";
+const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
 
 export default async function SponsorStrip() {
   const supporters = await getSupporters();

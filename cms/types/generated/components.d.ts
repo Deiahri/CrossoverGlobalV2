@@ -7,7 +7,10 @@ export interface SiteComponentsContentAndImage extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    media: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     text: Schema.Attribute.Blocks;
     youtubeURL: Schema.Attribute.String;
   };

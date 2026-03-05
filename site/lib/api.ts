@@ -1,7 +1,7 @@
 import { resolveStrapiMediaUrl } from "./tools";
 import type { Article, Project, Sponsorship, Supporter } from "./types";
 
-const STRAPI_URL = process.env.STRAPI_URL ?? "http://localhost:1337";
+const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
 
 // ---------------------------------------------------------------------------
 // Post-processing — resolve Strapi media URLs recursively
@@ -41,7 +41,8 @@ interface StrapiListResponse<T> {
 
 async function strapiList<T>(path: string, tags: string[]): Promise<T[]> {
   try {
-    const res = await fetch(`${STRAPI_URL}/api${path}`, {
+    const res = await fetch(`${NEXT_PUBLIC_STRAPI_URL}/api${path}`, {
+      cache: 'force-cache',
       next: { tags },
       headers: {
         authorization: `Bearer ${process.env.STRAPI_API_TOKEN!}`,

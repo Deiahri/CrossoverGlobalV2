@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getArticle, getArticleSlugs } from '../../../lib/api'
 import RichText from '../../../_components/RichText'
-import YoutubeEmbed from '../../../_components/YoutubeEmbed'
 import Reveal from '../../../_components/Reveal'
 import { RiArrowLeftLine, RiCalendarLine, RiUserLine } from 'react-icons/ri'
 import { resolveStrapiMediaUrl } from '@/lib/tools'
@@ -57,8 +56,8 @@ export default async function ArticleDetailPage({ params }: PageProps) {
             <Reveal variant="fadeLeft" className="relative w-full max-w-xs mx-auto lg:mx-0 lg:w-64 shrink-0">
               <div className="aspect-square overflow-hidden rounded-2xl shadow-md bg-neutral-100">
                 <img
-                  src={resolveStrapiMediaUrl(article.featured_image.url)}
-                  alt={article.featured_image.alternativeText ?? article.title}
+                  src={article.featured_image?.url || ''}
+                  alt={article.featured_image?.alternativeText ?? article.title}
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -99,36 +98,31 @@ export default async function ArticleDetailPage({ params }: PageProps) {
       {/* Article body */}
       {article.content?.map((section, i) => (
         <Reveal key={i} variant="fadeUp" className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">
-          {section.media && (
-            <div className="mb-6 overflow-hidden rounded-lg">
-              {section.media.mime.startsWith('video/') ? (
+          {section.media?.map((m, j) => (
+            <div key={j} className="mb-6 overflow-hidden rounded-lg">
+              {m.mime.startsWith('video/') ? (
                 <video
-                  src={resolveStrapiMediaUrl(section.media.url)}
+                  src={resolveStrapiMediaUrl(m.url)}
                   controls
                   className="w-full rounded-lg"
-                  aria-label={section.media.alternativeText ?? undefined}
+                  aria-label={m.alternativeText ?? undefined}
                 />
-              ) : section.media.mime.startsWith('audio/') ? (
+              ) : m.mime.startsWith('audio/') ? (
                 <audio
-                  src={section.media.url}
+                  src={m.url}
                   controls
                   className="w-full"
-                  aria-label={section.media.alternativeText ?? undefined}
+                  aria-label={m.alternativeText ?? undefined}
                 />
               ) : (
                 <img
-                  src={resolveStrapiMediaUrl(section.media.url)}
-                  alt={section.media.alternativeText ?? ''}
+                  src={resolveStrapiMediaUrl(m.url)}
+                  alt={m.alternativeText ?? ''}
                   className="w-full rounded-lg object-cover"
                 />
               )}
             </div>
-          )}
-          {section.youtubeURL && (
-            <div className="mb-6">
-              <YoutubeEmbed url={section.youtubeURL} />
-            </div>
-          )}
+          ))}
           {section.text && <RichText content={section.text} />}
         </Reveal>
       ))}
