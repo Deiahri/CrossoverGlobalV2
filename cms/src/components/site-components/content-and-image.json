@@ -18,6 +18,9 @@
     },
     "text": {
       "type": "blocks"
+    },
+    "youtubeURL": {
+      "type": "string"
     }
   },
   "config": {}

@@ -103,7 +103,7 @@ export default function ImpactGrid({ impacts }: ImpactGridProps) {
   return (
     <>
       <section aria-label="Project impact">
-        <h2 className="mb-8 text-2xl font-bold text-foreground">Impact</h2>
+        <h2 className="mb-8 text-4xl font-bold text-foreground">Impact</h2>
         <div className="flex flex-col">
           {impacts.map((impact, i) => {
             const flip = i % 2 !== 0

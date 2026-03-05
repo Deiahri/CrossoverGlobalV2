@@ -15,10 +15,9 @@ function useMount() {
 function heroStyle(mounted: boolean, delay: number): React.CSSProperties {
   return {
     opacity: mounted ? 1 : 0,
-    transform: mounted ? 'translateY(0)' : 'translateY(24px)',
+    transform: mounted ? 'none' : 'translateY(24px)',
     transition: `opacity 700ms var(--ease-out), transform 700ms var(--ease-out)`,
     transitionDelay: `${delay}ms`,
-    willChange: 'opacity, transform',
   }
 }
 
@@ -79,7 +78,7 @@ export default function HomeHero() {
             href="/projects"
             variant="donate"
             size="lg"
-            className="w-full sm:w-auto"
+            className="sm:w-auto"
           >
             <RiHeartLine className="w-5 h-5" aria-hidden />
             Give Now
@@ -88,7 +87,7 @@ export default function HomeHero() {
             href="/about"
             variant="ghost"
             size="lg"
-            className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10 hover:border-white/60"
+            className="sm:w-auto border-white/40 text-white hover:bg-white/10 hover:border-white/60"
           >
             Learn More
             <RiArrowRightLine className="w-5 h-5" aria-hidden />

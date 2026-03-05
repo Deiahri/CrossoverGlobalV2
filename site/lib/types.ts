@@ -98,6 +98,7 @@ export interface Supporter {
 
 export interface ArticleSection {
   media: StrapiMedia
+  youtubeURL?: string
   text: BlocksContent
 }
 

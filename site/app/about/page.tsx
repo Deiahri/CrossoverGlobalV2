@@ -78,7 +78,7 @@ export default function AboutPage() {
           <Reveal variant="fadeUp" delay={100}>
             <h2
               id="mission-heading"
-              className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl leading-tight mb-6"
+              className="text-3xl font-bold text-foreground sm:text-4xl lg:text-4xl leading-tight mb-6"
             >
               &ldquo;To provide life assistance to those of our brothers and sisters who need it.&rdquo;
             </h2>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { RiHeartLine, RiExternalLinkLine, RiYoutubeLine, RiFacebookBoxLine } from 'react-icons/ri'
 
-const LOGO_SRC = 'https://www.crossoverglobal.org/images/logo.png'
+const LOGO_SRC = '/logo/logo.png'
 
 const HELP_LINKS = [
   { href: '/projects', label: 'Donate to a Project' },

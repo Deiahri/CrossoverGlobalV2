@@ -5,6 +5,7 @@ import { resolveStrapiMediaUrl } from '@/lib/tools'
 import Badge from '../../../_components/Badge'
 import BibleVerse from '../../../_components/BibleVerse'
 import RichText from '../../../_components/RichText'
+import YoutubeEmbed from '../../../_components/YoutubeEmbed'
 import ImpactGrid from '../../../_components/ImpactGrid'
 import DonorboxEmbed from '../../../_components/DonorboxEmbed'
 import Button from '../../../_components/Button'
@@ -142,6 +143,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     className="w-full rounded-lg object-cover"
                   />
                 )}
+              </div>
+            )}
+            {section.youtubeURL && (
+              <div className="mb-6">
+                <YoutubeEmbed url={section.youtubeURL} />
               </div>
             )}
             {section.text && <RichText content={section.text} />}

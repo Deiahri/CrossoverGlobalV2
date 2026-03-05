@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getArticle, getArticleSlugs } from '../../../lib/api'
 import RichText from '../../../_components/RichText'
+import YoutubeEmbed from '../../../_components/YoutubeEmbed'
 import Reveal from '../../../_components/Reveal'
 import { RiArrowLeftLine, RiCalendarLine, RiUserLine } from 'react-icons/ri'
 import { resolveStrapiMediaUrl } from '@/lib/tools'
@@ -121,6 +122,11 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                   className="w-full rounded-lg object-cover"
                 />
               )}
+            </div>
+          )}
+          {section.youtubeURL && (
+            <div className="mb-6">
+              <YoutubeEmbed url={section.youtubeURL} />
             </div>
           )}
           {section.text && <RichText content={section.text} />}

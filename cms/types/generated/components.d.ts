@@ -9,6 +9,7 @@ export interface SiteComponentsContentAndImage extends Struct.ComponentSchema {
   attributes: {
     media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     text: Schema.Attribute.Blocks;
+    youtubeURL: Schema.Attribute.String;
   };
 }
 

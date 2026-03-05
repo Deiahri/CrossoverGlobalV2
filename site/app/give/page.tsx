@@ -79,14 +79,14 @@ export default function GivePage() {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+              {/* <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 <Button href="/projects" variant="ghost" size="md" className="border-white/25 text-white hover:bg-white/10">
                   Browse Projects <RiArrowRightLine className="w-4 h-4" />
                 </Button>
                 <Button href="/sponsorship" variant="ghost" size="md" className="border-white/25 text-white hover:bg-white/10">
                   Sponsorships <RiArrowRightLine className="w-4 h-4" />
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             {/* Right — donorbox widget */}

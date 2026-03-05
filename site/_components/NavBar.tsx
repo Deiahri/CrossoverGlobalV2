@@ -68,11 +68,11 @@ export default function NavBar() {
                 <img
                   src={LOGO_WORDS}
                   alt="Crossover Global"
-                  className="h-8 w-auto object-contain absolute inset-0"
+                  className="h-8 w-auto object-contain absolute inset-0 top-0.5"
                   style={{
                     transition: `opacity var(--duration-normal), transform var(--duration-normal)`,
                     opacity: scrolled || open ? 0 : 1,
-                    transform: scrolled || open ? "translateX(20px)" : "translateX(0)",
+                    transform: scrolled || open ? "translateX(3rem)" : "translateX(0)",
                     filter: "brightness(0) invert(1)",
                   }}
                 />
@@ -85,7 +85,7 @@ export default function NavBar() {
                   style={{
                     transition: `opacity var(--duration-normal), transform var(--duration-normal)`,
                     opacity: scrolled && !open ? 1 : 0,
-                    transform: scrolled && !open ? "translateX(0)" : "translateX(-20px)",
+                    transform: scrolled && !open ? "translateX(0)" : "translateX(-3rem)",
                   }}
                 />
               </span>
