@@ -108,7 +108,7 @@ export default async function SponsorshipDetailPage({ params }: PageProps) {
         {s.sponsee_request_video && (
           <Reveal variant="fadeUp">
             <YoutubeEmbed
-              url={'https://youtu.be/da4LpPSKD7g'}
+              url={s.sponsee_request_video}
               title={`${s.sponsee} sponsorship video`}
             />
           </Reveal>

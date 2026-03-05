@@ -13,7 +13,7 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <section className="flex flex-col md:flex-row" aria-labelledby="about-heading">
 
-          <Reveal variant="fadeLeft" className="relative min-h-72 w-full md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
+          <Reveal variant="fadeLeft" className="relative h-72 w-full md:h-auto md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
             <img src={'/img/school-boys-2.jpg'} alt="Crossover Global ministry" className="h-full w-full object-cover" />
           </Reveal>
 
@@ -46,7 +46,7 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <section className="flex flex-col md:flex-row-reverse" aria-labelledby="projects-heading">
 
-          <Reveal variant="fadeRight" className="relative min-h-72 w-full md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
+          <Reveal variant="fadeRight" className="relative h-72 w-full md:h-auto md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
             <img src="/img/ProjectsBG.png" alt="Crossover Global projects" className="h-full w-full object-cover" />
           </Reveal>
 
@@ -79,7 +79,7 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <section className="flex flex-col md:flex-row" aria-labelledby="sponsorship-heading">
 
-          <Reveal variant="fadeLeft" className="relative min-h-72 w-full md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
+          <Reveal variant="fadeLeft" className="relative h-72 w-full md:h-auto md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
             <img src={'/img/little-girls.png'} alt="Crossover Global ministry" className="h-full w-full object-cover" />
           </Reveal>
 
@@ -112,7 +112,7 @@ export default function HomePage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <section className="flex flex-col md:flex-row-reverse" aria-labelledby="good-news-heading">
 
-          <Reveal variant="fadeRight" className="relative min-h-72 w-full md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
+          <Reveal variant="fadeRight" className="relative h-72 w-full md:h-auto md:min-h-120 md:w-1/2 rounded-sm overflow-hidden">
             <img src={'/img/independent-widows.jpg'} alt="Crossover Global ministry" className="h-full w-full object-cover" />
           </Reveal>
 

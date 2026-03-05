@@ -26,7 +26,7 @@ export default function HomeHero() {
 
   return (
     <section
-      className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-brand-950"
+      className="relative flex min-h-[95vh] items-center justify-center overflow-hidden bg-brand-950"
       aria-label="Mission hero"
     >
       {/* Background gradient texture */}
@@ -71,7 +71,7 @@ export default function HomeHero() {
 
         {/* CTAs */}
         <div
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="flex items-center flex-wrap justify-center gap-4 sm:flex-row"
           style={heroStyle(mounted, STAGGER[2])}
         >
           <Button
@@ -95,12 +95,12 @@ export default function HomeHero() {
         </div>
 
         {/* Trust signal */}
-        <p
+        {/* <p
           className="mt-10 text-xs text-brand-400 tracking-wide uppercase"
           style={heroStyle(mounted, STAGGER[3])}
         >
           Listed on Charity Navigator · EIN 81-3269633
-        </p>
+        </p> */}
       </div>
     </section>
   )

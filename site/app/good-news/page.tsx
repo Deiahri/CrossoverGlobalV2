@@ -32,7 +32,7 @@ export default async function GoodNewsPage() {
 
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {articles.length > 0 ? (
-          <div className="divide-y divide-border">
+          <div className="flex flex-col gap-4">
             {articles.map((article, i) => (
               <Reveal key={article.slug} variant="fadeUp" delay={i * 60}>
                 <ArticleCard {...article} />

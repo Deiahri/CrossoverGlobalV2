@@ -487,7 +487,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     completion_date: Schema.Attribute.DateTime;
-    completion_notes: Schema.Attribute.String;
+    completion_notes: Schema.Attribute.Text;
     content: Schema.Attribute.Component<
       'site-components.content-and-image',
       true

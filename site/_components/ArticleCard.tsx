@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { RiArrowRightLine } from 'react-icons/ri'
 import type { Article } from '../lib/types'
 import { resolveStrapiMediaUrl } from '@/lib/tools'
 
@@ -16,10 +17,11 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
   return (
     <Link
       href={`/good-news/${slug}`}
-      className="group flex gap-6 py-8"
+      className="group flex gap-5 p-5 rounded-xl border border-border bg-surface hover:bg-surface-raised hover:border-primary/30 hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer"
+      style={{ transitionDuration: 'var(--duration-fast)' }}
     >
       {/* Thumbnail */}
-      <div className="hidden sm:block shrink-0 w-44 h-28 rounded-lg overflow-hidden bg-neutral-100">
+      <div className="hidden sm:block shrink-0 w-40 h-28 rounded-lg overflow-hidden bg-neutral-100">
         <img
           src={resolveStrapiMediaUrl(featured_image?.url || '')}
           alt={featured_image?.alternativeText ?? title}
@@ -29,7 +31,7 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
       </div>
 
       {/* Text */}
-      <div className="flex flex-col gap-2 min-w-0">
+      <div className="flex flex-col gap-2 min-w-0 flex-1">
         <div className="flex items-center gap-2 text-xs text-muted-fg">
           <time dateTime={publish_date}>{formatDate(publish_date)}</time>
           {author && (
@@ -46,6 +48,9 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
           {title}
         </h3>
         <p className="text-sm text-muted-fg leading-relaxed line-clamp-2">{desc}</p>
+        <span className="mt-auto pt-1 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity" style={{ transitionDuration: 'var(--duration-fast)' }}>
+          Read more <RiArrowRightLine className="transition-transform group-hover:translate-x-0.5" style={{ transitionDuration: 'var(--duration-fast)' }} />
+        </span>
       </div>
     </Link>
   )

@@ -104,7 +104,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 <video
                   src={resolveStrapiMediaUrl(m.url)}
                   controls
-                  className="w-full rounded-lg"
+                  className="w-full max-h-105 rounded-lg object-contain bg-black"
                   aria-label={m.alternativeText ?? undefined}
                 />
               ) : m.mime.startsWith('audio/') ? (
@@ -118,7 +118,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
                 <img
                   src={resolveStrapiMediaUrl(m.url)}
                   alt={m.alternativeText ?? ''}
-                  className="w-full rounded-lg object-cover"
+                  className="w-full max-h-105 rounded-lg object-cover"
                 />
               )}
             </div>

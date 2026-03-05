@@ -81,7 +81,7 @@
       "default": false
     },
     "completion_notes": {
-      "type": "string"
+      "type": "text"
     },
     "completion_date": {
       "type": "datetime"

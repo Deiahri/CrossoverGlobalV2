@@ -1,12 +1,12 @@
-import { revalidateTag } from 'next/cache'
+import { revalidateTag, revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Maps Strapi model name → { collection tag, individual tag prefix }
-const MODEL_MAP: Record<string, { collection: string; prefix: string }> = {
-  project:     { collection: 'projects',     prefix: 'project' },
-  sponsorship: { collection: 'sponsorships', prefix: 'sponsorship' },
-  article:     { collection: 'articles',     prefix: 'article' },
-  supporter:   { collection: 'supporters',   prefix: 'supporter' },
+// Maps Strapi model name → { collection tag, individual tag prefix, list path, item path prefix }
+const MODEL_MAP: Record<string, { collection: string; prefix: string; listPath: string; itemPathPrefix: string }> = {
+  project:     { collection: 'projects',     prefix: 'project',     listPath: '/projects',    itemPathPrefix: '/projects/' },
+  sponsorship: { collection: 'sponsorships', prefix: 'sponsorship', listPath: '/sponsorship', itemPathPrefix: '/sponsorship/' },
+  article:     { collection: 'articles',     prefix: 'article',     listPath: '/good-news',   itemPathPrefix: '/good-news/' },
+  supporter:   { collection: 'supporters',   prefix: 'supporter',   listPath: '/',            itemPathPrefix: '/' },
 }
 
 export async function POST(req: NextRequest) {
@@ -39,8 +39,9 @@ export async function POST(req: NextRequest) {
 
   const revalidated: string[] = []
 
-  // Always revalidate the collection (list pages + static params)
+  // Always revalidate the collection (data cache + full route cache)
   revalidateTag(mapping.collection, 'max')
+  revalidatePath(mapping.listPath)
   revalidated.push(mapping.collection)
 
   // Revalidate the specific item page if slug is present
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest) {
   if (slug) {
     const itemTag = `${mapping.prefix}_${slug}`
     revalidateTag(itemTag, 'max')
+    revalidatePath(`${mapping.itemPathPrefix}${slug}`)
     revalidated.push(itemTag)
   }
 
