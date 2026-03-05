@@ -28,7 +28,7 @@ export default async function SponsorStrip() {
             >
               <div className="relative h-24 w-full overflow-hidden rounded-md">
                 <img
-                  src={`${STRAPI_URL}${s.img.url}`}
+                  src={`${s.img.url}`}
                   alt={s.img.alternativeText ?? s.title}
                   className="h-full w-full object-cover"
                 />

@@ -1,7 +1,30 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Button from './Button'
 import { RiArrowRightLine, RiHeartLine } from 'react-icons/ri'
 
+const STAGGER = [0, 150, 300, 450]
+
+function useMount() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+  return mounted
+}
+
+function heroStyle(mounted: boolean, delay: number): React.CSSProperties {
+  return {
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? 'translateY(0)' : 'translateY(24px)',
+    transition: `opacity 700ms var(--ease-out), transform 700ms var(--ease-out)`,
+    transitionDelay: `${delay}ms`,
+    willChange: 'opacity, transform',
+  }
+}
+
 export default function HomeHero() {
+  const mounted = useMount()
+
   return (
     <section
       className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-brand-950"
@@ -29,26 +52,29 @@ export default function HomeHero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center text-white">
-        {/* Eyebrow */}
-        {/* <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-600 bg-brand-900/60 px-4 py-1.5 text-sm text-brand-200 backdrop-blur-sm">
-          <RiHeartLine className="w-4 h-4 text-brand-400" aria-hidden />
-          501(c)(3) Charitable Organization
-        </div> */}
-
         {/* Headline */}
-        <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+        <h1
+          className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
+          style={heroStyle(mounted, STAGGER[0])}
+        >
           Providing Life Assistance
           <br />
           <span className="text-brand-300">Where It Matters Most</span>
         </h1>
 
         {/* Mission statement */}
-        <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-brand-100 sm:text-xl">
-          Supporting widows, orphans, missionaries, and underprivileged communities worldwide.
+        <p
+          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-brand-100 sm:text-xl"
+          style={heroStyle(mounted, STAGGER[1])}
+        >
+          Supporting widows, orphans, missionaries, and underprivileged communities in Nigeria.
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          style={heroStyle(mounted, STAGGER[2])}
+        >
           <Button
             href="/projects"
             variant="donate"
@@ -70,17 +96,13 @@ export default function HomeHero() {
         </div>
 
         {/* Trust signal */}
-        <p className="mt-10 text-xs text-brand-400 tracking-wide uppercase">
+        <p
+          className="mt-10 text-xs text-brand-400 tracking-wide uppercase"
+          style={heroStyle(mounted, STAGGER[3])}
+        >
           Listed on Charity Navigator · EIN 81-3269633
         </p>
       </div>
-
-      {/* Bottom gradient fade */}
-      {/* <div
-        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, var(--background))' }}
-        aria-hidden
-      /> */}
     </section>
   )
 }

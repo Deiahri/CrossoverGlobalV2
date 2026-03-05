@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { RiMapPin2Line } from 'react-icons/ri'
 import Badge from './Badge'
 import type { Project } from '../lib/types'
+import { resolveStrapiMediaUrl } from '@/lib/tools'
 
 type ProjectCardProps = Pick<Project, 'slug' | 'title' | 'image' | 'desc' | 'location' | 'complete' | 'amount_raised'>
 
@@ -15,10 +15,9 @@ export default function ProjectCard({ slug, title, image, desc, location, comple
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden bg-neutral-100">
-        <Image
-          src={image.url}
+        <img
+          src={resolveStrapiMediaUrl(image.url)}
           alt={image.alternativeText ?? title}
-          fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform group-hover:scale-105"
           style={{ transitionDuration: 'var(--duration-slow)' }}

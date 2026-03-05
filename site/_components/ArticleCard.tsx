@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { Article } from '../lib/types'
-import { resolveStrapiImageUrl } from '@/lib/tools'
+import { resolveStrapiMediaUrl } from '@/lib/tools'
 
 type ArticleCardProps = Pick<Article, 'slug' | 'title' | 'desc' | 'featured_image' | 'publish_date' | 'author'>
 
@@ -21,7 +21,7 @@ export default function ArticleCard({ slug, title, desc, featured_image, publish
       {/* Thumbnail */}
       <div className="hidden sm:block flex-shrink-0 w-44 h-28 rounded-lg overflow-hidden bg-neutral-100">
         <img
-          src={resolveStrapiImageUrl(featured_image.url)}
+          src={resolveStrapiMediaUrl(featured_image.url)}
           alt={featured_image.alternativeText ?? title}
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
           style={{ transitionDuration: 'var(--duration-slow)' }}

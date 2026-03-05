@@ -19,6 +19,7 @@ Sourced from: https://crossoverglobal.org — scraped 2026-02-24
 | `/sponsorship/[slug]` | `site/app/sponsorship/[slug]/page.tsx` | Individual sponsorship detail — sponsee bio, needs, donate CTA | Static pre-render | Done |
 | `/good-news` | `site/app/good-news/page.tsx` | Good News — blog/newsletter article listing | Static | Done |
 | `/good-news/[slug]` | `site/app/good-news/[slug]/page.tsx` | Individual article — full post content | Static pre-render | Done |
+| `/give` | `site/app/give/page.tsx` | General giving page — general fund, project/sponsorship links, trust signals | Static | Done |
 
 ---
 
@@ -31,8 +32,9 @@ Sourced from: https://crossoverglobal.org — scraped 2026-02-24
 │   └── /projects/[slug]
 ├── /sponsorship    ← nav + "Sponsor Someone" section CTA
 │   └── /sponsorship/[slug]
-└── /good-news      ← nav + "Good News" section CTA
-    └── /good-news/[slug]
+├── /good-news      ← nav + "Good News" section CTA
+│   └── /good-news/[slug]
+└── /give           ← NavBar "Give Now" button
 ```
 
 ### Home Page Outbound Links
@@ -47,6 +49,7 @@ Sourced from: https://crossoverglobal.org — scraped 2026-02-24
 | Featured Projects section | `/projects` | Section CTA |
 | Sponsorship section | `/sponsorship` | Section CTA |
 | Good News section | `/good-news` | Section CTA |
+| NavBar "Give Now" button | `/give` | Nav CTA |
 
 ---
 

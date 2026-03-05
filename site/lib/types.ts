@@ -6,7 +6,7 @@ import type { BlocksContent } from '@strapi/blocks-react-renderer'
 
 export interface StrapiMedia {
   url: string
-  mime: string // e.g. "image/jpeg", "video/mp4"
+  mime: string // e.g. "image/jpeg", "video/mp4", "audio/mpeg"
   alternativeText?: string | null
   caption?: string | null
   width?: number
@@ -22,6 +22,11 @@ export interface StrapiMedia {
   publishedAt?: string
 }
 
+/** Narrowed media types */
+export type StrapiPhoto = StrapiMedia & { mime: `image/${string}` }
+export type StrapiVideo = StrapiMedia & { mime: `video/${string}` }
+export type StrapiAudio = StrapiMedia & { mime: `audio/${string}` }
+
 // ---------------------------------------------------------------------------
 // Project
 // ---------------------------------------------------------------------------
@@ -36,20 +41,16 @@ export interface ProjectImpact {
 export interface Project {
   slug: string
   title: string
-  image: StrapiMedia
+  image: StrapiPhoto
   desc: string // short card desc
   location: string
-  overview_video?: StrapiMedia
-  long_desc: BlocksContent
-  goals: BlocksContent
-  pre_project_photos: StrapiMedia[]
+  content: ArticleSection[]
   donorbox_code: string // raw Donorbox HTML embed (donate widget)
   donorbox_wall?: string // raw Donorbox donor wall HTML
   bible_verse_content: string
   bible_verse_cv: string // citation, e.g. "2 Timothy 1:7"
-  amount_raised?: string // e.g. "$524.33"
-  impacts: ProjectImpact[]
-  post_project_photos: StrapiMedia[]
+  amount_raised?: number // e.g. 524.33
+  impacts?: ProjectImpact[]
   complete: boolean
   completion_date?: string // ISO date string
   completion_notes?: string
@@ -70,7 +71,7 @@ export interface Sponsorship {
   sponsee: string // person's name
   country: string
   short_desc: string // short card desc
-  image: StrapiMedia
+  image: StrapiPhoto
   sponsee_desc: BlocksContent
   sponsee_request_desc: BlocksContent // itemized costs / needs
   sponsee_request_video?: string // YouTube embed URL
@@ -85,7 +86,7 @@ export interface Sponsorship {
 // ---------------------------------------------------------------------------
 
 export interface Supporter {
-  img: StrapiMedia
+  img: StrapiPhoto
   title: string
   description: string
   website: string
@@ -95,12 +96,17 @@ export interface Supporter {
 // Article (Good News)
 // ---------------------------------------------------------------------------
 
+export interface ArticleSection {
+  media: StrapiMedia
+  text: BlocksContent
+}
+
 export interface Article {
   slug: string
   title: string
   desc: string
-  featured_image: StrapiMedia
-  content: BlocksContent
+  featured_image: StrapiPhoto
+  content: ArticleSection[]
   publish_date: string // ISO date string
   author?: string
 }

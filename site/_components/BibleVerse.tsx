@@ -11,7 +11,7 @@ export default function BibleVerse({ content, cv }: BibleVerseProps) {
     >
       {/* Large decorative quote mark */}
       <span
-        className="absolute -top-5 left-8 text-8xl font-serif leading-none text-brand-200 select-none pointer-events-none"
+        className="absolute top-0 left-8 text-8xl font-serif leading-none text-brand-200 select-none pointer-events-none"
         aria-hidden
       >
         &ldquo;

@@ -30,14 +30,16 @@
         "audios"
       ]
     },
-    "content": {
-      "type": "blocks"
-    },
     "publish_date": {
       "type": "datetime"
     },
     "author": {
       "type": "string"
+    },
+    "content": {
+      "type": "component",
+      "component": "site-components.content-and-image",
+      "repeatable": true
     }
   }
 }

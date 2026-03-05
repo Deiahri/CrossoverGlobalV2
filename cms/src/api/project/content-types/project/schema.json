@@ -1,0 +1,90 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "desc": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "component",
+      "component": "site-components.content-and-image",
+      "repeatable": true
+    },
+    "donorbox_code": {
+      "type": "string",
+      "required": true
+    },
+    "donorbox_wall": {
+      "type": "text"
+    },
+    "bible_verse_content": {
+      "type": "text"
+    },
+    "bible_verse_cv": {
+      "type": "string"
+    },
+    "amount_raised": {
+      "type": "decimal",
+      "required": false
+    },
+    "impacts": {
+      "type": "component",
+      "component": "site-components.project-impact",
+      "repeatable": true
+    },
+    "post_project_photos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "complete": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "completion_date": {
+      "type": "string"
+    },
+    "completion_notes": {
+      "type": "string"
+    }
+  }
+}

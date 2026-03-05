@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { RiHeartLine, RiExternalLinkLine, RiYoutubeLine } from 'react-icons/ri'
+import { RiHeartLine, RiExternalLinkLine, RiYoutubeLine, RiFacebookBoxLine } from 'react-icons/ri'
 
 const LOGO_SRC = 'https://www.crossoverglobal.org/images/logo.png'
 
@@ -27,11 +26,9 @@ export default function Footer() {
               className="inline-block mb-3"
               aria-label="Crossover Global"
             >
-              <Image
+              <img
                 src={LOGO_SRC}
                 alt="Crossover Global"
-                width={180}
-                height={40}
                 className="h-8 w-auto object-contain"
               />
             </Link>
@@ -49,6 +46,16 @@ export default function Footer() {
                 style={{ transitionDuration: 'var(--duration-fast)' }}
               >
                 <RiYoutubeLine className="w-4 h-4" aria-hidden />
+              </a>
+              <a
+                href="https://www.facebook.com/people/Crossover-Global-Facilitating-Ministry-Inc/100063746584058/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Crossover Global on Facebook"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-neutral-700 text-neutral-300 hover:bg-blue-600 hover:text-white transition-colors"
+                style={{ transitionDuration: 'var(--duration-fast)' }}
+              >
+                <RiFacebookBoxLine className="w-4 h-4" aria-hidden />
               </a>
             </div>
             <div className="mt-3 flex items-center gap-1.5 text-xs text-neutral-500">
