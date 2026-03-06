@@ -14,12 +14,11 @@ export default function ProjectCard({ slug, title, image, desc, location, comple
       style={{ transitionDuration: 'var(--duration-normal)' }}
     >
       {/* Image */}
-      <div className="relative aspect-video overflow-hidden bg-neutral-100">
+      <div className="relative aspect-video overflow-hidden bg-neutral-100 flex items-center justify-center">
         <img
           src={resolveStrapiMediaUrl(image.url)}
           alt={image.alternativeText ?? title}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform group-hover:scale-105"
+          className="object-cover transition-transform group-hover:scale-105 w-full h-full"
           style={{ transitionDuration: 'var(--duration-slow)' }}
         />
         <div className="absolute top-3 left-3">
@@ -41,11 +40,11 @@ export default function ProjectCard({ slug, title, image, desc, location, comple
             <RiMapPin2Line className="w-3.5 h-3.5 shrink-0" aria-hidden />
             {location}
           </span>
-          {amount_raised && (
+            {amount_raised && (
             <span className="text-xs font-semibold text-primary">
-              {amount_raised} raised
+              ${new Intl.NumberFormat('en-US').format(Math.ceil(amount_raised))} raised
             </span>
-          )}
+            )}
         </div>
       </div>
     </Link>

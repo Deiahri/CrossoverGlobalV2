@@ -20,7 +20,7 @@ export default function DonorboxEmbed({ html, id }: DonorboxEmbedProps) {
         width: '100%',
         margin: 'auto',
         backgroundColor: 'white',
-        height: '42rem'
+        height: '35rem'
       }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
