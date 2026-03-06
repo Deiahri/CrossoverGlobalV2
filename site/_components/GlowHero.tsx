@@ -27,9 +27,9 @@ export default function GlowHero({ title, subtitle, icons }: GlowHeroProps) {
     >
       <style>{`
         @keyframes glow-hero-float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33%       { transform: translateY(-10px) rotate(4deg); }
-          66%       { transform: translateY(-5px) rotate(-3deg); }
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          33%       { transform: translateY(-0.625rem) rotate(4deg); }
+          66%       { transform: translateY(-0.3125rem) rotate(-3deg); }
         }
       `}</style>
 

@@ -7,15 +7,15 @@ export type RevealVariant = 'fadeUp' | 'fadeLeft' | 'fadeRight' | 'fade'
 
 const VARIANTS: Record<RevealVariant, { hidden: CSSProperties; visible: CSSProperties }> = {
   fadeUp: {
-    hidden: { opacity: 0, transform: 'translateY(28px)' },
+    hidden: { opacity: 0, transform: 'translateY(1.75rem)' },
     visible: { opacity: 1, transform: 'none' },
   },
   fadeLeft: {
-    hidden: { opacity: 0, transform: 'translateX(-36px)' },
+    hidden: { opacity: 0, transform: 'translateX(-2.25rem)' },
     visible: { opacity: 1, transform: 'none' },
   },
   fadeRight: {
-    hidden: { opacity: 0, transform: 'translateX(36px)' },
+    hidden: { opacity: 0, transform: 'translateX(2.25rem)' },
     visible: { opacity: 1, transform: 'none' },
   },
   fade: {

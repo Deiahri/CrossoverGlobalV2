@@ -23,7 +23,7 @@ export default function PageHero({ title, subtitle }: PageHeroProps) {
           className="text-4xl font-bold tracking-tight sm:text-5xl text-white"
           style={{
             opacity: mounted ? 1 : 0,
-            transform: mounted ? 'translateY(0)' : 'translateY(20px)',
+            transform: mounted ? 'translateY(0)' : 'translateY(1.25rem)',
             transition: 'opacity 600ms var(--ease-out), transform 600ms var(--ease-out)',
             transitionDelay: '0ms',
           }}
@@ -35,7 +35,7 @@ export default function PageHero({ title, subtitle }: PageHeroProps) {
             className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand-300"
             style={{
               opacity: mounted ? 1 : 0,
-              transform: mounted ? 'translateY(0)' : 'translateY(20px)',
+              transform: mounted ? 'translateY(0)' : 'translateY(1.25rem)',
               transition: 'opacity 600ms var(--ease-out), transform 600ms var(--ease-out)',
               transitionDelay: '150ms',
             }}

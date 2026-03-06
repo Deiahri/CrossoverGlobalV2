@@ -81,7 +81,7 @@ export async function getProjectSlugs(): Promise<string[]> {
 export async function getProject(slug: string): Promise<Project | null> {
   const items = await strapiList<Project>(
     `/projects?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[content][populate][media]=true&populate[impacts][populate][media]=true&pagination[limit]=1`,
-    ["projects", `project_${slug}`],
+    ["project", `project_${slug}`],
   );
   return items[0] ?? null;
 }
@@ -113,7 +113,7 @@ export async function getSponsorship(
 ): Promise<Sponsorship | null> {
   const items = await strapiList<Sponsorship>(
     `/sponsorships?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[optional_sections]=true&pagination[limit]=1`,
-    ["sponsorships", `sponsorship_${slug}`],
+    ["sponsorship", `sponsorship_${slug}`],
   );
   return items[0] ?? null;
 }
@@ -143,7 +143,7 @@ export async function getArticleSlugs(): Promise<string[]> {
 export async function getArticle(slug: string): Promise<Article | null> {
   const items = await strapiList<Article>(
     `/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[featured_image]=true&populate[content][populate][media]=true&pagination[limit]=1`,
-    ["articles", `article_${slug}`],
+    ["article", `article_${slug}`],
   );
   return items[0] ?? null;
 }

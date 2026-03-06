@@ -17,9 +17,11 @@ export default function ShareLinks({ title, text, subheading, scrollTargetId }: 
     try {
       await navigator.share({ title, text, url: window.location.href })
     } catch {
-      await navigator.clipboard.writeText(window.location.href)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(window.location.href)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
     }
   }
 

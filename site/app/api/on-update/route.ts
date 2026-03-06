@@ -1,12 +1,12 @@
-import { revalidateTag, revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Maps Strapi model name → { collection tag, individual tag prefix, list path, item path prefix }
-const MODEL_MAP: Record<string, { collection: string; prefix: string; listPath: string; itemPathPrefix: string }> = {
-  project:     { collection: 'projects',     prefix: 'project',     listPath: '/projects',    itemPathPrefix: '/projects/' },
-  sponsorship: { collection: 'sponsorships', prefix: 'sponsorship', listPath: '/sponsorship', itemPathPrefix: '/sponsorship/' },
-  article:     { collection: 'articles',     prefix: 'article',     listPath: '/good-news',   itemPathPrefix: '/good-news/' },
-  supporter:   { collection: 'supporters',   prefix: 'supporter',   listPath: '/',            itemPathPrefix: '/' },
+// Maps Strapi model name → { singular tag (item fetches), plural tag (list fetches) }
+const MODEL_MAP: Record<string, { singular: string; plural: string }> = {
+  project:     { singular: 'project',     plural: 'projects'     },
+  sponsorship: { singular: 'sponsorship', plural: 'sponsorships' },
+  article:     { singular: 'article',     plural: 'articles'     },
+  supporter:   { singular: 'supporter',   plural: 'supporters'   },
 }
 
 export async function POST(req: NextRequest) {
@@ -39,18 +39,17 @@ export async function POST(req: NextRequest) {
 
   const revalidated: string[] = []
 
-  // Always revalidate the collection (data cache + full route cache)
-  revalidateTag(mapping.collection, 'max')
-  revalidatePath(mapping.listPath)
-  revalidated.push(mapping.collection)
+  // Always revalidate both list and item-level tags
+  revalidateTag(mapping.plural, 'max')
+  revalidateTag(mapping.singular, 'max')
+  revalidated.push(mapping.plural, mapping.singular)
 
-  // Revalidate the specific item page if slug is present
+  // Revalidate the specific item if slug is present
   const slug = entry?.slug
   if (slug) {
-    const itemTag = `${mapping.prefix}_${slug}`
-    revalidateTag(itemTag, 'max')
-    revalidatePath(`${mapping.itemPathPrefix}${slug}`)
-    revalidated.push(itemTag)
+    const slugTag = `${mapping.singular}_${slug}`
+    revalidateTag(slugTag, 'max')
+    revalidated.push(slugTag)
   }
 
   return NextResponse.json({ revalidated: true, tags: revalidated })

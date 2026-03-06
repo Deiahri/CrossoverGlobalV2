@@ -15,7 +15,7 @@ function useMount() {
 function heroStyle(mounted: boolean, delay: number): React.CSSProperties {
   return {
     opacity: mounted ? 1 : 0,
-    transform: mounted ? 'none' : 'translateY(24px)',
+    transform: mounted ? 'none' : 'translateY(1.5rem)',
     transition: `opacity 700ms var(--ease-out), transform 700ms var(--ease-out)`,
     transitionDelay: `${delay}ms`,
   }
@@ -44,7 +44,7 @@ export default function HomeHero() {
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, transparent, transparent 40px, var(--brand-400) 40px, var(--brand-400) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, var(--brand-400) 40px, var(--brand-400) 41px)',
+            'repeating-linear-gradient(0deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 1px)), repeating-linear-gradient(90deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 1px))',
         }}
         aria-hidden
       />

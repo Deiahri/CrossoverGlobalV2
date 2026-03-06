@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'Support Crossover Global with a general gift. Every dollar provides life assistance to widows, orphans, missionaries, and underprivileged communities around the world.',
 }
 
-const DONORBOX_HTML = `<script src="https://donorbox.org/widget.js" paypalExpress="true"></script><iframe src="https://donorbox.org/embed/all-projects-page-1?language=en" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="900px" width="100%" style="max-width: 500px; min-width: 250px; max-height:none!important" allow="payment"></iframe>`
+const DONORBOX_HTML = `<script src="https://donorbox.org/widget.js" paypalExpress="true"></script><iframe src="https://donorbox.org/embed/all-projects-page-1?language=en" name="donorbox" allowpaymentrequest="allowpaymentrequest" seamless="seamless" frameborder="0" scrolling="no" height="56.25rem" width="100%" style="max-width: 31.25rem; min-width: 15.625rem; max-height:none!important" allow="payment"></iframe>`
 
 const IMPACT_POINTS = [
   'Widows equipped with financial independence',
