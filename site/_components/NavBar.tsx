@@ -71,8 +71,8 @@ export default function NavBar() {
                   className="h-8 w-auto object-contain absolute inset-0 top-0.5"
                   style={{
                     transition: `opacity var(--duration-normal), transform var(--duration-normal)`,
-                    opacity: scrolled || open ? 0 : 1,
-                    transform: scrolled || open ? "translateX(3rem)" : "translateX(0)",
+                    opacity: scrolled && !open ? 0 : 1,
+                    transform: scrolled && !open ? "translateX(3rem)" : "translateX(0)",
                     filter: "brightness(0) invert(1)",
                   }}
                 />
@@ -196,7 +196,7 @@ export default function NavBar() {
                 }`}
                 style={{
                   opacity: open ? 1 : 0,
-                  transform: open ? "translateY(0)" : "translateY(12px)",
+                  transform: open ? "translateY(0)" : "translateY(0.75rem)",
                   transition: `opacity var(--duration-slow) var(--ease-out) ${i * 60}ms, transform var(--duration-slow) var(--ease-out) ${i * 60}ms, color var(--duration-fast)`,
                 }}
               >
@@ -215,7 +215,7 @@ export default function NavBar() {
             style={{
               backgroundColor: "var(--donate)",
               opacity: open ? 1 : 0,
-              transform: open ? "translateY(0)" : "translateY(12px)",
+              transform: open ? "translateY(0)" : "translateY(0.75rem)",
               transition: `opacity var(--duration-slow) var(--ease-out) ${NAV_LINKS.length * 60}ms, transform var(--duration-slow) var(--ease-out) ${NAV_LINKS.length * 60}ms, background-color var(--duration-fast)`,
             }}
           >

@@ -44,7 +44,7 @@ export default function NotFound() {
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 1px)), repeating-linear-gradient(90deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 1px))',
+            'repeating-linear-gradient(0deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 0.0625rem)), repeating-linear-gradient(90deg, transparent, transparent 2.5rem, var(--brand-400) 2.5rem, var(--brand-400) calc(2.5rem + 0.0625rem))',
         }}
         aria-hidden
       />

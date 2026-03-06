@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Limit concurrent static page generation to avoid overwhelming Strapi Cloud
+    staticGenerationMaxConcurrency: 1,
+    'workerThreads': false
+  },
   images: {
     remotePatterns: [
       {

@@ -23,14 +23,14 @@ export default async function SponsorStrip() {
               href={s.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex w-52 flex-col items-center gap-3 rounded-xl border border-transparent px-5 py-4 text-center transition-[border-color,background-color,box-shadow] hover:border-border hover:bg-surface hover:shadow-sm"
+              className="group flex w-72 flex-col items-center gap-3 rounded-xl border border-transparent px-5 py-4 text-center transition-[border-color,background-color,box-shadow] hover:border-border hover:bg-surface hover:shadow-sm"
               style={{ transitionDuration: 'var(--duration-fast)' }}
             >
               <div className="relative h-24 w-full overflow-hidden rounded-md">
                 <img
                   src={`${s.img.url}`}
                   alt={s.img.alternativeText ?? s.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               </div>
               <div className="flex flex-col gap-1">

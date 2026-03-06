@@ -1,5 +1,11 @@
-import { resolveStrapiMediaUrl } from "./tools";
+import { resolveStrapiMediaUrl, sleep } from "./tools";
 import type { Article, Project, Sponsorship, Supporter } from "./types";
+
+const SLEEP_POOL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
+function randomSleep() {
+  const seconds = SLEEP_POOL[Math.floor(Math.random() * SLEEP_POOL.length)];
+  return sleep(seconds * 1000);
+}
 
 const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
 
@@ -40,20 +46,21 @@ interface StrapiListResponse<T> {
 }
 
 async function strapiList<T>(path: string, tags: string[]): Promise<T[]> {
-  try {
-    const res = await fetch(`${NEXT_PUBLIC_STRAPI_URL}/api${path}`, {
-      cache: 'force-cache',
-      next: { tags },
-      headers: {
-        authorization: `Bearer ${process.env.STRAPI_API_TOKEN!}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    const json: StrapiListResponse<T> = await res.json();
-    return (json.data ?? []).map(postProcess);
-  } catch {
-    return [];
+  // await randomSleep();
+  const url = `${NEXT_PUBLIC_STRAPI_URL}/api${path}`;
+  const res = await fetch(url, {
+    next: { tags },
+    headers: {
+      authorization: `Bearer ${process.env.STRAPI_API_TOKEN!}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!res.ok) {
+    throw new Error(`Strapi fetch failed: ${res.status} ${res.statusText} — ${url}`);
   }
+  const json: StrapiListResponse<T> = await res.json();
+  // console.log(`[strapi] ${url} → ${json.data?.length ?? 0} items`, JSON.stringify(json.data ?? null, null, 2));
+  return (json.data ?? []).map(postProcess);
 }
 
 // ---------------------------------------------------------------------------
@@ -75,6 +82,7 @@ export async function getProjectSlugs(): Promise<string[]> {
     "/projects?fields[0]=slug&pagination[limit]=100",
     ["projects"],
   );
+  // console.log('getProjectSlugs', items);
   return items.map((p) => p.slug).filter(Boolean);
 }
 
