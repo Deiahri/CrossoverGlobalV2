@@ -14,12 +14,11 @@ export default function SponsorshipCard({ slug, title, image, short_desc, countr
       style={{ transitionDuration: 'var(--duration-normal)' }}
     >
       {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-neutral-100">
+      <div className="relative aspect-square overflow-hidden bg-neutral-100 flex items-center justify-center p-4">
         <img
           src={resolveStrapiMediaUrl(image.url)}
           alt={image.alternativeText ?? sponsee}
-          className="w-full h-full object-cover transition-transform group-hover:scale-105"
-          style={{ transitionDuration: 'var(--duration-slow)' }}
+          className="w-full h-full object-contain"
         />
         <div className="absolute top-3 left-3">
           <Badge label={country} variant="country" />
