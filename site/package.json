@@ -6,17 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "backup": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/backup-strapi.mjs",
+    "migrate": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/migrate-strapi-to-sanity.mjs",
+    "verify-migration": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/verify-migration.mjs",
+    "typegen": "sanity schemas extract --force && sanity typegen generate"
   },
   "dependencies": {
-    "@strapi/blocks-react-renderer": "^1.0.2",
+    "@portabletext/react": "^8.0.1",
+    "@sanity/image-url": "^2.1.1",
     "husky": "^9.1.7",
     "next": "16.1.6",
+    "next-sanity": "^13.3.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
+    "@sanity/client": "^8.3.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -2,12 +2,11 @@
 
 import { useState } from 'react'
 import { RiPlayCircleLine } from 'react-icons/ri'
-import type { StrapiMedia } from '../lib/types'
-import { resolveStrapiMediaUrl } from '@/lib/tools'
+import type { MediaAsset } from '../lib/types'
 import Lightbox from './Lightbox'
 
 interface MediaGalleryProps {
-  items: StrapiMedia[]
+  items: MediaAsset[]
   heading?: string
 }
 
@@ -45,7 +44,7 @@ export default function MediaGallery({ items, heading }: MediaGalleryProps) {
               </>
             ) : (
               <img
-                src={resolveStrapiMediaUrl(item.url)}
+                src={item.url}
                 alt={item.alternativeText ?? `Photo ${i + 1}`}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform"
                 style={{ transitionDuration: 'var(--duration-slow)' }}

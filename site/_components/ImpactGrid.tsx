@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from 'react'
-import type { ProjectImpact, StrapiMedia } from '../lib/types'
-import { resolveStrapiMediaUrl } from '../lib/tools'
+import type { ProjectImpact, MediaAsset } from '../lib/types'
 import Lightbox from './Lightbox'
 
 interface ImpactGridProps {
   impacts: ProjectImpact[]
 }
 
-function MediaCluster({ media, onOpen }: { media: StrapiMedia[]; onOpen: (i: number) => void }) {
+function MediaCluster({ media, onOpen }: { media: MediaAsset[]; onOpen: (i: number) => void }) {
   const count = media.length
 
   if (count === 0) return null
@@ -23,9 +22,9 @@ function MediaCluster({ media, onOpen }: { media: StrapiMedia[]; onOpen: (i: num
         aria-label="View photo"
       >
         {m.mime.startsWith('video/') ? (
-          <video src={resolveStrapiMediaUrl(m.url)} className="w-full h-full object-cover" preload="metadata" />
+          <video src={m.url} className="w-full h-full object-cover" preload="metadata" />
         ) : (
-          <img src={resolveStrapiMediaUrl(m.url)} alt={m.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
+          <img src={m.url} alt={m.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
         )}
       </button>
     )
@@ -37,9 +36,9 @@ function MediaCluster({ media, onOpen }: { media: StrapiMedia[]; onOpen: (i: num
         {media.map((m, j) => (
           <button key={j} onClick={() => onOpen(j)} className="overflow-hidden rounded-xl cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={`View photo ${j + 1}`}>
             {m.mime.startsWith('video/') ? (
-              <video src={resolveStrapiMediaUrl(m.url)} className="w-full h-full object-cover" preload="metadata" />
+              <video src={m.url} className="w-full h-full object-cover" preload="metadata" />
             ) : (
-              <img src={resolveStrapiMediaUrl(m.url)} alt={m.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
+              <img src={m.url} alt={m.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
             )}
           </button>
         ))}
@@ -55,25 +54,25 @@ function MediaCluster({ media, onOpen }: { media: StrapiMedia[]; onOpen: (i: num
       {/* Big left */}
       <button onClick={() => onOpen(0)} className="row-span-2 overflow-hidden rounded-xl cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label="View photo 1">
         {first.mime.startsWith('video/') ? (
-          <video src={resolveStrapiMediaUrl(first.url)} className="w-full h-full object-cover" preload="metadata" />
+          <video src={first.url} className="w-full h-full object-cover" preload="metadata" />
         ) : (
-          <img src={resolveStrapiMediaUrl(first.url)} alt={first.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
+          <img src={first.url} alt={first.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
         )}
       </button>
       {/* Top right */}
       <button onClick={() => onOpen(1)} className="overflow-hidden rounded-xl cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label="View photo 2">
         {second.mime.startsWith('video/') ? (
-          <video src={resolveStrapiMediaUrl(second.url)} className="w-full h-full object-cover" preload="metadata" />
+          <video src={second.url} className="w-full h-full object-cover" preload="metadata" />
         ) : (
-          <img src={resolveStrapiMediaUrl(second.url)} alt={second.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
+          <img src={second.url} alt={second.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
         )}
       </button>
       {/* Bottom right — shows +extra overlay if more */}
       <button onClick={() => onOpen(2)} className="relative overflow-hidden rounded-xl cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={extra > 0 ? `View all ${count} photos` : 'View photo 3'}>
         {third.mime.startsWith('video/') ? (
-          <video src={resolveStrapiMediaUrl(third.url)} className="w-full h-full object-cover" preload="metadata" />
+          <video src={third.url} className="w-full h-full object-cover" preload="metadata" />
         ) : (
-          <img src={resolveStrapiMediaUrl(third.url)} alt={third.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
+          <img src={third.url} alt={third.alternativeText ?? ''} className="w-full h-full object-cover transition-transform duration-200 hover:scale-105" />
         )}
         {extra > 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-xl">
@@ -86,12 +85,12 @@ function MediaCluster({ media, onOpen }: { media: StrapiMedia[]; onOpen: (i: num
 }
 
 export default function ImpactGrid({ impacts }: ImpactGridProps) {
-  const [lightboxMedia, setLightboxMedia] = useState<StrapiMedia[] | null>(null)
+  const [lightboxMedia, setLightboxMedia] = useState<MediaAsset[] | null>(null)
   const [lightboxIndex, setLightboxIndex] = useState(0)
 
   if (!impacts || impacts.length === 0) return null
 
-  const openLightbox = (media: StrapiMedia[], index: number) => {
+  const openLightbox = (media: MediaAsset[], index: number) => {
     setLightboxMedia(media)
     setLightboxIndex(index)
   }

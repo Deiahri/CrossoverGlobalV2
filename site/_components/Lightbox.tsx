@@ -7,11 +7,10 @@ import {
   RiArrowLeftSLine,
   RiArrowRightSLine,
 } from "react-icons/ri";
-import type { StrapiMedia } from "../lib/types";
-import { resolveStrapiMediaUrl } from "@/lib/tools";
+import type { MediaAsset } from "../lib/types";
 
 interface LightboxProps {
-  items: StrapiMedia[];
+  items: MediaAsset[];
   index: number;
   onClose: () => void;
   onPrev: () => void;
@@ -135,10 +134,10 @@ export default function Lightbox({
               aria-current={i === index}
             >
               {t.mime.startsWith("video/") ? (
-                <video src={resolveStrapiMediaUrl(t.url)} className="h-full w-full object-cover" preload="metadata" />
+                <video src={t.url} className="h-full w-full object-cover" preload="metadata" />
               ) : (
                 <img
-                  src={resolveStrapiMediaUrl(t.url)}
+                  src={t.url}
                   alt={t.alternativeText ?? `Thumbnail ${i + 1}`}
                   className="h-full w-full object-cover"
                 />

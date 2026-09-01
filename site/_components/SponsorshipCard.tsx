@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { RiCheckboxCircleLine } from 'react-icons/ri'
 import Badge from './Badge'
 import type { Sponsorship } from '../lib/types'
-import { resolveStrapiMediaUrl } from '@/lib/tools'
 
 type SponsorshipCardProps = Pick<Sponsorship, 'slug' | 'title' | 'image' | 'short_desc' | 'country' | 'sponsee' | 'complete'>
 
@@ -16,7 +15,7 @@ export default function SponsorshipCard({ slug, title, image, short_desc, countr
       {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-neutral-100 flex items-center justify-center p-4">
         <img
-          src={resolveStrapiMediaUrl(image.url)}
+          src={image.url}
           alt={image.alternativeText ?? sponsee}
           className="w-full h-full object-contain"
         />

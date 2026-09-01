@@ -1,159 +1,85 @@
-import { resolveStrapiMediaUrl, sleep } from "./tools";
-import type { Article, Project, Sponsorship, Supporter } from "./types";
+import { client } from '@/sanity/client'
+import {
+  ARTICLE_QUERY,
+  ARTICLE_SLUGS_QUERY,
+  ARTICLES_QUERY,
+  PROJECT_QUERY,
+  PROJECT_SLUGS_QUERY,
+  PROJECTS_QUERY,
+  SPONSORSHIP_QUERY,
+  SPONSORSHIP_SLUGS_QUERY,
+  SPONSORSHIPS_QUERY,
+  SUPPORTERS_QUERY,
+} from '@/sanity/queries'
+import type { Article, Project, Sponsorship, Supporter } from './types'
 
-const SLEEP_POOL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
-function randomSleep() {
-  const seconds = SLEEP_POOL[Math.floor(Math.random() * SLEEP_POOL.length)];
-  return sleep(seconds * 1000);
+/**
+ * Cache tags are unchanged from the Strapi implementation — `app/api/on-update`
+ * still revalidates exactly these strings.
+ */
+function query<T>(q: string, tags: string[], params: Record<string, unknown> = {}): Promise<T> {
+  return client.fetch<T>(q, params, { next: { tags } })
 }
 
-const NEXT_PUBLIC_STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
-
-// ---------------------------------------------------------------------------
-// Post-processing — resolve Strapi media URLs recursively
-// ---------------------------------------------------------------------------
-
-function postProcess<T>(value: T): T {
-  if (Array.isArray(value)) {
-    return value.map(postProcess) as unknown as T
-  }
-  if (value !== null && typeof value === 'object') {
-    const obj = value as Record<string, unknown>
-    if (typeof obj['url'] === 'string') {
-      obj['url'] = resolveStrapiMediaUrl(obj['url'])
-    }
-    for (const key of Object.keys(obj)) {
-      obj[key] = postProcess(obj[key])
-    }
-  }
-  return value
-}
-
-// ---------------------------------------------------------------------------
-// Low-level fetch helper
-// ---------------------------------------------------------------------------
-
-interface StrapiListResponse<T> {
-  data: T[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-}
-
-async function strapiList<T>(path: string, tags: string[]): Promise<T[]> {
-  // await randomSleep();
-  const url = `${NEXT_PUBLIC_STRAPI_URL}/api${path}`;
-  const res = await fetch(url, {
-    next: { tags },
-    headers: {
-      authorization: `Bearer ${process.env.STRAPI_API_TOKEN!}`,
-      'Content-Type': 'application/json'
-    }
-  });
-  if (!res.ok) {
-    throw new Error(`Strapi fetch failed: ${res.status} ${res.statusText} — ${url}`);
-  }
-  const json: StrapiListResponse<T> = await res.json();
-  // console.log(`[strapi] ${url} → ${json.data?.length ?? 0} items`, JSON.stringify(json.data ?? null, null, 2));
-  return (json.data ?? []).map(postProcess);
+/**
+ * Slug lists feed generateStaticParams at build time, where a stale CDN edge
+ * would silently drop a newly published page from the build.
+ */
+function queryFresh<T>(q: string, tags: string[]): Promise<T> {
+  return client.withConfig({ useCdn: false }).fetch<T>(q, {}, { next: { tags } })
 }
 
 // ---------------------------------------------------------------------------
 // Projects
 // ---------------------------------------------------------------------------
 
-const PROJECT_CARD_FIELDS =
-  "fields[0]=slug&fields[1]=title&fields[2]=desc&fields[3]=location&fields[4]=complete&fields[5]=amount_raised";
-
 export async function getProjects(): Promise<Project[]> {
-  return strapiList<Project>(
-    `/projects?${PROJECT_CARD_FIELDS}&populate[image]=true&sort[0]=complete:asc&sort[1]=createdAt:desc&pagination[limit]=100`,
-    ["projects"],
-  );
+  return query<Project[]>(PROJECTS_QUERY, ['projects'])
 }
 
 export async function getProjectSlugs(): Promise<string[]> {
-  const items = await strapiList<{ slug: string }>(
-    "/projects?fields[0]=slug&pagination[limit]=100",
-    ["projects"],
-  );
-  // console.log('getProjectSlugs', items);
-  return items.map((p) => p.slug).filter(Boolean);
+  const slugs = await queryFresh<string[]>(PROJECT_SLUGS_QUERY, ['projects'])
+  return slugs.filter(Boolean)
 }
 
 export async function getProject(slug: string): Promise<Project | null> {
-  const items = await strapiList<Project>(
-    `/projects?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[content][populate][media]=true&populate[impacts][populate][media]=true&pagination[limit]=1`,
-    ["project", `project_${slug}`],
-  );
-  return items[0] ?? null;
+  return query<Project | null>(PROJECT_QUERY, ['project', `project_${slug}`], { slug })
 }
 
 // ---------------------------------------------------------------------------
 // Sponsorships
 // ---------------------------------------------------------------------------
 
-const SPONSORSHIP_CARD_FIELDS =
-  "fields[0]=slug&fields[1]=title&fields[2]=short_desc&fields[3]=country&fields[4]=sponsee&fields[5]=complete";
-
 export async function getSponsorships(): Promise<Sponsorship[]> {
-  return strapiList<Sponsorship>(
-    `/sponsorships?${SPONSORSHIP_CARD_FIELDS}&populate[image]=true&sort[0]=complete:asc&sort[1]=createdAt:desc&pagination[limit]=100`,
-    ["sponsorships"],
-  );
+  return query<Sponsorship[]>(SPONSORSHIPS_QUERY, ['sponsorships'])
 }
 
 export async function getSponsorshipSlugs(): Promise<string[]> {
-  const items = await strapiList<{ slug: string }>(
-    "/sponsorships?fields[0]=slug&pagination[limit]=100",
-    ["sponsorships"],
-  );
-  return items.map((s) => s.slug).filter(Boolean);
+  const slugs = await queryFresh<string[]>(SPONSORSHIP_SLUGS_QUERY, ['sponsorships'])
+  return slugs.filter(Boolean)
 }
 
-export async function getSponsorship(
-  slug: string,
-): Promise<Sponsorship | null> {
-  const items = await strapiList<Sponsorship>(
-    `/sponsorships?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[image]=true&populate[optional_sections]=true&pagination[limit]=1`,
-    ["sponsorship", `sponsorship_${slug}`],
-  );
-  return items[0] ?? null;
+export async function getSponsorship(slug: string): Promise<Sponsorship | null> {
+  return query<Sponsorship | null>(SPONSORSHIP_QUERY, ['sponsorship', `sponsorship_${slug}`], {
+    slug,
+  })
 }
 
 // ---------------------------------------------------------------------------
 // Articles
 // ---------------------------------------------------------------------------
 
-const ARTICLE_CARD_FIELDS =
-  "fields[0]=slug&fields[1]=title&fields[2]=desc&fields[3]=publish_date&fields[4]=author";
-
 export async function getArticles(): Promise<Article[]> {
-  return strapiList<Article>(
-    `/articles?${ARTICLE_CARD_FIELDS}&populate[featured_image]=true&sort[0]=publish_date:desc&pagination[limit]=100`,
-    ["articles"],
-  );
+  return query<Article[]>(ARTICLES_QUERY, ['articles'])
 }
 
 export async function getArticleSlugs(): Promise<string[]> {
-  const items = await strapiList<{ slug: string }>(
-    "/articles?fields[0]=slug&pagination[limit]=100",
-    ["articles"],
-  );
-  return items.map((a) => a.slug).filter(Boolean);
+  const slugs = await queryFresh<string[]>(ARTICLE_SLUGS_QUERY, ['articles'])
+  return slugs.filter(Boolean)
 }
 
 export async function getArticle(slug: string): Promise<Article | null> {
-  const items = await strapiList<Article>(
-    `/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[featured_image]=true&populate[content][populate][media]=true&pagination[limit]=1`,
-    ["article", `article_${slug}`],
-  );
-  return items[0] ?? null;
+  return query<Article | null>(ARTICLE_QUERY, ['article', `article_${slug}`], { slug })
 }
 
 // ---------------------------------------------------------------------------
@@ -161,8 +87,5 @@ export async function getArticle(slug: string): Promise<Article | null> {
 // ---------------------------------------------------------------------------
 
 export async function getSupporters(): Promise<Supporter[]> {
-  return strapiList<Supporter>(
-    `/supporters?populate[img]=true&sort[0]=createdAt:asc&pagination[limit]=100`,
-    ["supporters"],
-  );
+  return query<Supporter[]>(SUPPORTERS_QUERY, ['supporters'])
 }
