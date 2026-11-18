@@ -5,6 +5,7 @@ import Badge from "@/_components/Badge";
 import RichText from "@/_components/RichText";
 import YoutubeEmbed from "@/_components/YoutubeEmbed";
 import DonorboxEmbed from "@/_components/DonorboxEmbed";
+import OtherWaysToGive from "@/_components/OtherWaysToGive";
 import ShareLinks from "@/_components/ShareLinks";
 import ScrollIntoViewButton from "@/_components/ScrollIntoViewButton";
 import Reveal from "@/_components/Reveal";
@@ -162,6 +163,7 @@ export default async function SponsorshipDetailPage({ params }: PageProps) {
                 Sponsor {s.sponsee}
               </h2>
               <DonorboxEmbed html={s.donorbox_code} id="donorbox-embed" />
+              <OtherWaysToGive memo={`Sponsorship: ${s.sponsee}`} className="mt-8" />
             </section>
           </Reveal>
         )}

@@ -7,6 +7,7 @@ import RichText from '@/_components/RichText'
 import YoutubeEmbed from '@/_components/YoutubeEmbed'
 import ImpactGrid from '@/_components/ImpactGrid'
 import DonorboxEmbed from '@/_components/DonorboxEmbed'
+import OtherWaysToGive from '@/_components/OtherWaysToGive'
 import Button from '@/_components/Button'
 import Reveal from '@/_components/Reveal'
 import { RiMapPin2Line, RiMoneyDollarCircleLine, RiCalendarLine, RiArrowDownLine, RiSparkling2Line } from 'react-icons/ri'
@@ -197,6 +198,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   </div>
                 )}
               </div>
+              <OtherWaysToGive memo={`Project: ${project.title}`} className="mt-8" />
             </section>
           </Reveal>
         )}
