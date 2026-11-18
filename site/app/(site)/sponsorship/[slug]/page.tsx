@@ -163,7 +163,7 @@ export default async function SponsorshipDetailPage({ params }: PageProps) {
                 Sponsor {s.sponsee}
               </h2>
               <DonorboxEmbed html={s.donorbox_code} id="donorbox-embed" />
-              <OtherWaysToGive memo={`Sponsorship: ${s.sponsee}`} className="mt-8" />
+              <OtherWaysToGive className="mt-8" />
             </section>
           </Reveal>
         )}

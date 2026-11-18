@@ -198,7 +198,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   </div>
                 )}
               </div>
-              <OtherWaysToGive memo={`Project: ${project.title}`} className="mt-8" />
+              <OtherWaysToGive className="mt-8" />
             </section>
           </Reveal>
         )}
