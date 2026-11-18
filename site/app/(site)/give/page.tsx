@@ -94,6 +94,7 @@ export default function GivePage() {
             <div className="lg:w-1/2 xl:w-[45%] flex flex-col items-center justify-center gap-6 py-12 lg:py-24">
               <DonorboxEmbed html={DONORBOX_HTML} id="donorbox-general" />
               <OtherWaysToGive
+                memo="General Gift"
                 note="PayPal is also accepted in the form above."
               />
             </div>

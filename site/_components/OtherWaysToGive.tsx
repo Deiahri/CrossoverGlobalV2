@@ -3,12 +3,14 @@ import CopyButton from '@/_components/CopyButton'
 import { ZELLE } from '@/lib/giving'
 
 interface OtherWaysToGiveProps {
+  /** What the donor should write in the Zelle memo so the gift is designated correctly. */
+  memo: string
   /** Extra line shown under the heading, e.g. noting PayPal is accepted in the form. */
   note?: string
   className?: string
 }
 
-export default function OtherWaysToGive({ note, className = '' }: OtherWaysToGiveProps) {
+export default function OtherWaysToGive({ memo, note, className = '' }: OtherWaysToGiveProps) {
   return (
     <aside
       aria-labelledby="other-ways-heading"
@@ -35,6 +37,13 @@ export default function OtherWaysToGive({ note, className = '' }: OtherWaysToGiv
               Recipient shows as <strong className="text-foreground">{ZELLE.recipientName}</strong>.
             </p>
           )}
+        </li>
+        <li>
+          In the memo, write:
+          <div className="mt-1.5 flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+            <span className="flex-1 min-w-0 break-words font-medium select-all">{memo}</span>
+            <CopyButton value={memo} />
+          </div>
         </li>
       </ol>
 
